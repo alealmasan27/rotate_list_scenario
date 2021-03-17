@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 import { appleService } from './appleService';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ListGroup from 'react-bootstrap/ListGroup';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
 
 interface states {
   initialList: string[];
@@ -27,7 +31,7 @@ class App extends React.Component<{}, states> {
   fetchDataFromApi(inputText: string, currentInitialList: string[]) {
     appleService.getFirstFiveSongs(inputText).then((items: any) => {
       currentInitialList.push(items.shift());
-      this.setState({ searchList: items});
+      this.setState({ searchList: items });
     }).catch(console.log);
   }
 
@@ -58,7 +62,7 @@ class App extends React.Component<{}, states> {
   }
 
   renderLi(liHtml: string, index: number) {
-    return <li key={index}>{liHtml}</li>;
+    return <ListGroup.Item key={index} as="li">{liHtml} </ListGroup.Item>;
   }
 
   handleChange(e: any) {
@@ -68,10 +72,17 @@ class App extends React.Component<{}, states> {
   render() {
     return (
       <div className="App">
-        <input type="text" placeholder="Search songs" onChange={(e) => this.handleChange(e)} />
-        <ul>
+        <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Search song"
+            aria-label="Search song"
+            aria-describedby="basic-addon1"
+            onChange={(e) => this.handleChange(e)}
+          />
+        </InputGroup>
+        <ListGroup as="ul">
           {this.state.initialList.map((e: string, index: number) => this.renderLi(e, index))}
-        </ul>
+        </ListGroup>
       </div>
     );
   }
