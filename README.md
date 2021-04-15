@@ -1,6 +1,6 @@
 # Simple React with TypeScript extension
 
-The app that contains a search field, and a list of five elements underneath. 
+The app contains a search field, and a list of five elements underneath. 
 
 Per default the list should show: A, B, C, D, E. Every second the elements should rotate by one position. For example, after one second it will look like: B, C, D, E, A. After another second it will look like: C, D, E, A, B and so on. 
 
